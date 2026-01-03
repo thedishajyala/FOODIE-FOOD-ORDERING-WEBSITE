@@ -6,10 +6,10 @@ const DATABASE_CONFIG = {
     // Format: mongodb+srv://username:password@cluster.mongodb.net/database-name?retryWrites=true&w=majority
     // OR for local: mongodb://localhost:27017/database-name
 
-    MONGODB_URI: 'mongodb+srv://YOUR_USERNAME:YOUR_PASSWORD@cluster0.xxxxx.mongodb.net/foodie_db?retryWrites=true&w=majority',
+    MONGODB_URI: 'mongodb+srv://DISHA123:<db_password>@foodie.lmm2fz5.mongodb.net/foodie_db?retryWrites=true&w=majority&appName=FOODIE',
 
     // Database Name
-    DB_NAME: 'foodie_db',
+    DB_NAME: 'foodie_db', // Database name - will be created automatically
 
     // Collection Names (optional - can customize)
     COLLECTIONS: {
