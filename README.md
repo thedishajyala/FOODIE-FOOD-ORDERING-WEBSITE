@@ -1,30 +1,31 @@
-<h1 align="center">Foodie</h1>
-<h2 align="center" >Food Ordering Website</h2>
+<h1 align="center">🍕 Foodie - Food Ordering Website 🍔</h1>
+<h2 align="center">Modern Food Delivery & Restaurant Management Platform</h2>
 
-![foodie](https://github.com/khushi-joshi-05/Food-ordering-website/assets/133582566/1ce766f2-5a3a-49c0-9977-f492834c5916)
+<p align="center">
+  <img src="https://img.shields.io/badge/Made%20with-❤️%20by-Disha%20Jyala-red" alt="Made by Disha Jyala">
+  <img src="https://img.shields.io/badge/License-MIT-blue.svg" alt="License">
+  <img src="https://img.shields.io/badge/Status-Active-success" alt="Status">
+</p>
+
+<p align="center">
+  <strong>Developed by <a href="https://github.com/thedishajyala">Disha Jyala</a></strong>
+</p>
 
 <br>
 
-![Open Source Love](https://badges.frapsoft.com/os/v2/open-source.svg?v=103) &nbsp;
-![PRs Welcome](https://img.shields.io/badge/PRs-welcome-green.svg) &nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website"><img src="https://sloc.xyz/github/khushi-joshi-05/Food-ordering-website" alt="Lines of Code"/></a> &nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/stargazers"><img src="https://img.shields.io/github/stars/khushi-joshi-05/Food-ordering-website" alt="Stars Badge"/></a> &nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/network/members"><img src="https://img.shields.io/github/forks/khushi-joshi-05/Food-ordering-website" alt="Forks Badge"/></a> &nbsp;
-![GitHub contributors](https://img.shields.io/github/contributors/khushi-joshi-05/Food-ordering-website?color=blue) &nbsp;
-![GitHub last commit](https://img.shields.io/github/last-commit/khushi-joshi-05/Food-ordering-website?color=red&style=plastic) &nbsp;
-![Repo. Size](https://img.shields.io/github/repo-size/khushi-joshi-05/Food-ordering-website?color=white) &nbsp;  
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/blob/main/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?v=103"></a>&nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/issues"><img src="https://img.shields.io/github/issues/khushi-joshi-05/Food-ordering-website?color=0059b3"></a>&nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed-raw/khushi-joshi-05/Food-ordering-website?color=yellow"></a>&nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/pulls"><img src="https://img.shields.io/github/issues-pr/khushi-joshi-05/Food-ordering-website?color=brightgreen"></a>&nbsp;
-<a href="https://github.com/khushi-joshi-05/Food-ordering-website/pulls?q=is%3Apr+is%3Aclosed"><img src="https://img.shields.io/github/issues-pr-closed-raw/khushi-joshi-05/Food-ordering-website?color=0059b3"></a> &nbsp;
+## 👋 About This Project
 
-</br>
-</div>
+**Foodie** is a fully-featured food ordering website developed by **Disha Jyala**. It provides users with a seamless experience for ordering food online, booking tables for dining in, and managing their favorite restaurants. The website features a modern, responsive design with real-time order tracking, user authentication, and a complete menu management system.
 
-Foodie is a food ordering website that aims to provide users with a seamless experience for ordering food online, taking orders for pickup, and booking tables for dining in. The website showcases the quality and specialities of the food offered, along with a variety of services to cater to different user preferences.
+### 🎯 Key Highlights
 
-This repository is aimed to help people to contribute in open source and learn Git and GitHub.
+- ✅ **Full-Stack Application** - Frontend with backend API integration
+- ✅ **Database Integration** - MongoDB for data persistence
+- ✅ **User Authentication** - Secure login/signup system
+- ✅ **Real-time Cart Management** - Add, update, and remove items
+- ✅ **Order Management** - Track and manage orders
+- ✅ **Responsive Design** - Works on all devices
+- ✅ **Customizable Theme** - Easy color and theme customization
 
 ## Key Features
 
@@ -61,11 +62,16 @@ This repository is aimed to help people to contribute in open source and learn G
 4. **JavaScript Interactivity**:
    - Enhanced user interaction with dynamic features like menu filtering and form validation.
 
-## Tech Stack
+## 🛠️ Tech Stack
 
-- **Frontend**: HTML, CSS, JavaScript (for user interface and interactivity)
-- **Database**: MongoDB (for storing user data, orders, etc.)~~~~ need to be implemented
-- **Responsive Design**: Ensuring compatibility across various devices and screen sizes.
+- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
+- **Backend API**: RESTful API (Node.js/Express ready)
+- **Database**: MongoDB with Mongoose ODM
+- **Authentication**: JWT Token-based authentication
+- **Styling**: Custom CSS with Bootstrap 5
+- **Icons**: Font Awesome 6
+- **Animations**: AOS (Animate On Scroll)
+- **Responsive Design**: Mobile-first approach
 
 
 # 🍽️ Food Ordering Website: Run Locally & Contribute
@@ -123,66 +129,51 @@ This repository is aimed to help people to contribute in open source and learn G
 
 ## 🛠️ Contributing
 
-### Create an Issue
+---
 
-1. **Navigate to the GitHub Repository**:
-   - Go to [FoodOrderingWebsite Repository](https://github.com/khushi-joshi-05/Food-ordering-website.git ) .
+## ⚙️ Configuration
 
-2. **Open the Issues Tab**:
-   - Click on `Issues`.
-   - Click on `New issue`.
-   - Describe the issue clearly and submit.
+### MongoDB Setup
 
-### Fork, Commit, and Push Changes
+1. Create a MongoDB account at [mongodb.com](https://www.mongodb.com)
+2. Create a new cluster (free tier available)
+3. Get your connection string
+4. Update `backend-config.js` with your credentials
 
-1. **Fork the Repository**:
-   - Click on `Fork` at the top right of the repository page.
+### API Configuration
 
-2. **Clone Your Fork**:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/Food-ordering-website.git
-   ```
+Edit `config.js` and set your backend API URL:
+```javascript
+BASE_URL: 'http://localhost:3000/api' // Your backend URL
+```
 
-3. **Create a New Branch**:
-   ```bash
-   cd FoodOrderingWebsite
-   git checkout -b your-branch-name
-   ```
+### Theme Customization
 
-4. **Make Changes**:
-   - Edit files as needed.
-
-5. **Add and Commit Changes**:
-   ```bash
-   git add .
-   git commit -m "Your commit message"
-   ```
-
-6. **Push to Your Fork**:
-   ```bash
-   git push origin your-branch-name
-   ```
-
-### Create a Pull Request
-
-1. **Navigate to Your Fork on GitHub**:
-   - Go to your forked repository.
-
-2. **Open the Pull Requests Tab**:
-   - Click on `Pull requests`.
-   - Click on `New pull request`.
-
-3. **Compare Changes**:
-   - Select the base repository and branch.
-   - Select your fork and branch.
-
-4. **Submit the Pull Request**:
-   - Click on `Create pull request`.
-   - Describe your changes and submit.
+Edit `theme-config.js` to change colors, fonts, and styling throughout the website.
 
 ---
 
-Happy coding! Feel free to contribute and help us improve the Food Ordering Website. 🍕
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+---
+
+## 👨‍💻 Author
+
+**Disha Jyala**
+
+- GitHub: https://github.com/thedishajyala)
+- Email: thedishajyala@gmail.com
+- Portfolio: your-portfolio-url.com
+
+---
+
+## 🙏 Acknowledgments
+
+- Bootstrap team for the amazing CSS framework
+- Font Awesome for icons
+- All open-source contributors whose libraries made this possible
 
 ### Additional Notes 📝
 
@@ -233,17 +224,13 @@ Please note that this project is released with a [Contributor Code of Conduct](.
 This project is licensed under the [MIT License](./LICENSE).
 
 <hr>
- <!-- Cotributors -->
-<div>
-  <h2><img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Smilies/Red%20Heart.png" width="35" height="35"> Contributors</h2>
-</div>
+ ---
 
-Thank you for contributing to our repository.😃
+## ⭐ Star This Repo
 
-<a href="https://github.com/SaiyamTuteja/Faculty_Evaluation_System/graphs/contributors">
-  <img src="https://contributors-img.web.app/image?repo=khushi-joshi-05/Food-ordering-website" alt="Contributors" width="99%"/>
-</a>
+If you found this project helpful, please consider giving it a star on GitHub!
 
-<br>
+---
 
-Show some ❤️ by starring this awesome repository!
+<p align="center">Made with ❤️ by <strong>Disha Jyala</strong></p>
+<p align="center">© 2025 Disha Jyala. All rights reserved.</p>

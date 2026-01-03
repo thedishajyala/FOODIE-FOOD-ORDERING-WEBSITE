@@ -47,8 +47,28 @@ function renderPillsAndTabs() {
 
 renderPillsAndTabs();
 
-// Function to get meals by category
+// Function to get meals by category - NOW USES YOUR BACKEND
 async function getMealsByCategory(category) {
+    try {
+        // Try to use your backend API first
+        if (typeof getMenuByCategory === 'function') {
+            const backendData = await getMenuByCategory(category);
+            // If your backend returns meals in a different format, transform it here
+            // Expected format: array of objects with {id, name, imgSrc, price, ...}
+            if (Array.isArray(backendData) && backendData.length > 0) {
+                return backendData.map(item => ({
+                    strMeal: item.name || item.strMeal,
+                    strMealThumb: item.imgSrc || item.image || item.strMealThumb,
+                    idMeal: item.id || item.idMeal,
+                    price: item.price || '10.20'
+                }));
+            }
+        }
+    } catch (error) {
+        console.warn('Backend API not available, falling back to TheMealDB:', error);
+    }
+    
+    // Fallback to TheMealDB if backend is not available
     const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
     const response = await fetch(url);
     const data = await response.json();
@@ -200,53 +220,47 @@ function setCartItems(cartItems) {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
 }
 
-// Function to handle add to cart button click
-// function cartBtn() {
-//     menuContainer.addEventListener("click", (event) => {
-//         const clickedElement = event.target;
-//         if (clickedElement.classList.contains("add-to-cart-button")) {
-//             const productName = clickedElement.dataset.productName;
-//             const productImgSource = clickedElement.dataset.productImgsource;
-//             const productPrice = clickedElement.dataset.productPrice;
-
-//             // Get the current cart items
-//             const cartItems = getCartItems();
-
-//             // Check if the item is already in the cart
-//             const existingCartItem = cartItems.find(
-//                 (item) => item.name === productName
-//             );
-
-//             if (existingCartItem) {
-//                 // If the item is already in the cart, increase the quantity
-//                 existingCartItem.quantity += 1;
-//             } else {
-//                 // If the item is not in the cart, add it with quantity 1
-//                 cartItems.push({
-//                     name: productName,
-//                     imgSrc: productImgSource,
-//                     quantity: 1,
-//                     price: productPrice,
-//                 });
-//             }
-//             // console.log(cartItems);
-
-//             // Save the updated cart items to local storage
-//             setCartItems(cartItems);
-//         }
-//     });
-// }
+// Function to handle add to cart button click - NOW USES BACKEND
 function cartBtn() {
-    menuContainer.addEventListener("click", (event) => {
+    menuContainer.addEventListener("click", async (event) => {
         const clickedElement = event.target;
         if (clickedElement.classList.contains("add-to-cart-button")) {
+            const productId = clickedElement.dataset.productId;
             const productName = clickedElement.dataset.productName;
-            const productImgSource = clickedElement.dataset.productImgSource ;
+            const productImgSource = clickedElement.dataset.productImgSource;
             const productPrice = clickedElement.dataset.productPrice;
 
-            console.log("dataset", clickedElement.dataset)
+            console.log("Adding to cart:", { productId, productName, productPrice });
 
-            // Get the current cart items
+            // Try to use backend API if available
+            if (typeof addToCart === 'function') {
+                try {
+                    const cartItem = {
+                        id: productId,
+                        name: productName,
+                        price: productPrice,
+                        image: productImgSource,
+                        quantity: 1
+                    };
+                    await addToCart(cartItem);
+                    console.log('Item added to cart via backend');
+                    
+                    // Update cart count from backend
+                    try {
+                        const cart = await getCart();
+                        const totalquantity = cart.items ? cart.items.reduce((acc, item) => acc + (item.quantity || 1), 0) : 1;
+                        if (iconcartspan) iconcartspan.innerText = totalquantity;
+                    } catch (err) {
+                        console.warn('Could not update cart count from backend');
+                    }
+                    return; // Exit early if backend worked
+                } catch (error) {
+                    console.warn('Backend cart failed, falling back to localStorage:', error);
+                    // Continue to localStorage fallback below
+                }
+            }
+
+            // FALLBACK: Use localStorage if backend is not available
             const cartItems = getCartItems();
 
             // Check if the item is already in the cart
@@ -260,6 +274,7 @@ function cartBtn() {
             } else {
                 // If the item is not in the cart, add it with quantity 1
                 cartItems.push({
+                    id: productId,
                     name: productName,
                     imgSrc: productImgSource,
                     quantity: 1,
@@ -274,7 +289,7 @@ function cartBtn() {
             const totalquantity = cartItems.reduce((acc, item) => acc + item.quantity, 0);
 
             // Update the cart icon subscript
-            iconcartspan.innerText = totalquantity;
+            if (iconcartspan) iconcartspan.innerText = totalquantity;
         }
     });
 }
@@ -339,8 +354,27 @@ function filterMenu() {
     });
 }
 
-async function getMealsByCategory(category) {
+// Duplicate function - this one is also updated to use backend
+async function getMealsByCategoryBackend(category) {
     if (category.toLowerCase() === 'chinese') {
+        // Chinese category uses local images
+        try {
+            // Try backend first
+            if (typeof getMenuByCategory === 'function') {
+                const backendData = await getMenuByCategory(category);
+                if (Array.isArray(backendData) && backendData.length > 0) {
+                    return backendData.map(item => ({
+                        strMeal: item.name || item.strMeal,
+                        strMealThumb: item.imgSrc || item.image || item.strMealThumb,
+                        idMeal: item.id || item.idMeal
+                    }));
+                }
+            }
+        } catch (error) {
+            console.warn('Backend not available for Chinese category, using local images');
+        }
+        
+        // Fallback to local Chinese food images
         return [
             { strMeal: "Kung Pao Chicken", strMealThumb: "../Images/chinesefood/image.png", idMeal: "c1" },
             { strMeal: "Mapo Tofu", strMealThumb: "../Images/chinesefood/download (3).jpeg", idMeal: "c2" },
@@ -350,6 +384,23 @@ async function getMealsByCategory(category) {
             { strMeal: "Spring Rolls", strMealThumb: "../Images/chinesefood/download (7).jpeg", idMeal: "c6" },
         ];
     } else {
+        // For other categories, use backend API
+        try {
+            if (typeof getMenuByCategory === 'function') {
+                const backendData = await getMenuByCategory(category);
+                if (Array.isArray(backendData) && backendData.length > 0) {
+                    return backendData.map(item => ({
+                        strMeal: item.name || item.strMeal,
+                        strMealThumb: item.imgSrc || item.image || item.strMealThumb,
+                        idMeal: item.id || item.idMeal
+                    }));
+                }
+            }
+        } catch (error) {
+            console.warn('Backend API not available, falling back to TheMealDB:', error);
+        }
+        
+        // Fallback to TheMealDB
         const url = `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`;
         const response = await fetch(url);
         const data = await response.json();

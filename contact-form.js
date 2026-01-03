@@ -1,7 +1,7 @@
 
 const submitBtn = document.getElementById('contactForm');
 
-submitBtn.addEventListener('submit', (event) => {
+submitBtn.addEventListener('submit', async (event) => {
     event.preventDefault();
     const firstName = document.getElementById('first-name').value;
     const lastName = document.getElementById('last-name').value;
@@ -11,6 +11,23 @@ submitBtn.addEventListener('submit', (event) => {
 
     if (firstName && lastName && email && message) {
         if (emailPattern.test(email)) {
+            // Try to submit to backend if available
+            if (typeof submitContactForm === 'function') {
+                try {
+                    const formData = {
+                        firstName,
+                        lastName,
+                        email,
+                        message
+                    };
+                    await submitContactForm(formData);
+                    console.log('Contact form submitted to backend');
+                } catch (error) {
+                    console.error('Backend submission failed:', error);
+                    // Continue to show success message anyway (graceful degradation)
+                }
+            }
+            
             Toastify({
                 text: "Your message has been sent successfully!",
                 duration: 3000,

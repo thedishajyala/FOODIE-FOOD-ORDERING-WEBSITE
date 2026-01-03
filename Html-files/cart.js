@@ -1,4 +1,8 @@
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
+    // Try to load from backend first, fallback to localStorage
+    await loadCartFromBackend();
+    
+    // Also load from localStorage as fallback
     loadCartFromLocalStorage();
 
     document.getElementById('cart-items').addEventListener('click', (event) => {
@@ -9,6 +13,39 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 });
+
+// NEW: Load cart from backend
+async function loadCartFromBackend() {
+    if (typeof getCart === 'function') {
+        try {
+            const cart = await getCart();
+            if (cart && cart.items && Array.isArray(cart.items)) {
+                const cartItemsContainer = document.getElementById('cart-items');
+                if (cartItemsContainer) {
+                    cartItemsContainer.innerHTML = ''; // Clear existing items
+                    
+                    cart.items.forEach(item => {
+                        // Transform backend cart item to frontend format
+                        const cartItem = {
+                            id: item.id || item.productId,
+                            name: item.name || item.productName,
+                            price: item.price || item.unitPrice || item.totalPrice,
+                            quantity: item.quantity || 1,
+                            imgSrc: item.image || item.imgSrc || item.imageUrl
+                        };
+                        cartItemsContainer.appendChild(createCartItemElement(cartItem));
+                    });
+                    
+                    updateTotal();
+                    return true; // Successfully loaded from backend
+                }
+            }
+        } catch (error) {
+            console.warn('Could not load cart from backend, using localStorage:', error);
+        }
+    }
+    return false; // Backend not available or failed
+}
 
 function loadCartFromLocalStorage() {
     const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
@@ -23,14 +60,28 @@ function loadCartFromLocalStorage() {
     updateTotal();
 }
 
-function updateQuantity(button, change) {
+async function updateQuantity(button, change) {
     const cartItemRow = button.closest('.cart-item');
     const quantityElement = cartItemRow.querySelector('.quantity');
     const priceElement = cartItemRow.querySelector(".price");
     const unitPrice = parseFloat(cartItemRow.getAttribute('data-product-price'));
+    const itemId = cartItemRow.getAttribute('data-product-id');
     const newQuantity = parseInt(quantityElement.textContent) + change;
 
-    if (newQuantity <= 0) return; // Prevent quantity from being less than 1
+    if (newQuantity <= 0) {
+        // If quantity becomes 0, remove item
+        if (typeof removeFromCart === 'function' && itemId) {
+            try {
+                await removeFromCart(itemId);
+                cartItemRow.remove();
+                updateTotal();
+                return;
+            } catch (error) {
+                console.warn('Backend remove failed, using localStorage');
+            }
+        }
+        return; // Prevent quantity from being less than 1
+    }
 
     quantityElement.textContent = newQuantity;
     priceElement.textContent = (unitPrice * newQuantity).toFixed(2);
@@ -40,6 +91,15 @@ function updateQuantity(button, change) {
         decreaseBtn.classList.add("disable");
     } else {
         decreaseBtn.classList.remove("disable");
+    }
+
+    // Update in backend if available
+    if (typeof updateCartItem === 'function' && itemId) {
+        try {
+            await updateCartItem(itemId, newQuantity);
+        } catch (error) {
+            console.warn('Backend update failed, using localStorage:', error);
+        }
     }
 
     updateTotal();
@@ -166,17 +226,60 @@ const modal = document.getElementById("myModal");
 const closeButton = document.querySelector(".close");
 const orderNowButton = document.getElementById("orderNowButton");
 
-orderNowButton.addEventListener("click", () => {
+orderNowButton.addEventListener("click", async () => {
     const total = updateTotal(); // Calculate the total
-    const isEmptyCart =  handleEmptyCart(total);
+    const isEmptyCart = handleEmptyCart(total);
 
     if (isEmptyCart) {
-       
         return; // Exit early if the cart is empty
     }
 
-    // Only show modal if cart is not empty
-    else {modal.style.display = "block";}
+    // Collect order data
+    const cartItems = [];
+    document.querySelectorAll('.cart-item').forEach(item => {
+        cartItems.push({
+            id: item.getAttribute('data-product-id'),
+            name: item.getAttribute('data-product-name'),
+            price: parseFloat(item.getAttribute('data-product-price')),
+            quantity: parseInt(item.querySelector('.quantity').textContent),
+            image: item.getAttribute('data-product-image')
+        });
+    });
+
+    // Try to create order via backend
+    if (typeof createOrder === 'function') {
+        try {
+            const orderData = {
+                items: cartItems,
+                total: total,
+                // Add user info, address, etc. from your form/modal
+                // address: getAddressFromForm(),
+                // paymentMethod: getPaymentMethod()
+            };
+            
+            const order = await createOrder(orderData);
+            console.log('Order created successfully:', order);
+            
+            // Clear cart after successful order
+            if (typeof clearCart === 'function') {
+                await clearCart();
+            }
+            
+            // Clear localStorage cart too
+            localStorage.removeItem('cartItems');
+            
+            alert(`Order placed successfully! Order ID: ${order.orderId || order.id || 'N/A'}`);
+            window.location.href = '../index.html'; // Redirect to home
+            return;
+        } catch (error) {
+            console.error('Order creation failed:', error);
+            alert('Failed to place order. Please try again.');
+            // Continue to show modal as fallback
+        }
+    }
+
+    // Fallback: Show modal if backend is not available
+    modal.style.display = "block";
 });
 
 closeButton.addEventListener("click", () => {
