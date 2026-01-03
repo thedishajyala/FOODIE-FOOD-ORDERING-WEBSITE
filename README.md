@@ -1,5 +1,5 @@
-<h1 align="center">🍕 Foodie - Food Ordering Website 🍔</h1>
-<h2 align="center">Modern Food Delivery & Restaurant Management Platform</h2>
+<h1 align="center">🍕 Foodie — Food Ordering Website 🍔</h1>
+<h3 align="center">Modern, Responsive Frontend for Food Ordering</h3>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Made%20with-❤️%20by-Disha%20Jyala-red" alt="Made by Disha Jyala">
@@ -8,90 +8,109 @@
 </p>
 
 <p align="center">
-  <strong>Developed by <a href="https://github.com/thedishajyala">Disha Jyala</a></strong>
+  <strong>Frontend developed & maintained by <a href="https://github.com/thedishajyala">Disha Jyala</a></strong>
 </p>
 
-<br>
+---
 
 ## 👋 About This Project
 
-Foodie is a fully-featured food ordering website developed by **Disha Jyala**. It provides users with a seamless experience for ordering food online, booking tables for dining in, and managing their favorite restaurants. The website features a modern, responsive design with real-time order tracking, user authentication, and a complete menu management system.
+**Foodie** is a clean and responsive **frontend food ordering website** built using **HTML, CSS, and JavaScript**. The project focuses on user-friendly UI, smooth interactions, and a visually appealing layout for browsing menus, managing carts, and exploring restaurant services.
 
-### 🎯 Key Highlights
+> 📌 This repository represents the **frontend implementation**. Backend integration (authentication, database, APIs) can be added independently.
 
-- ✅ **Full-Stack Application** - Frontend with backend API integration
-- ✅ **Database Integration** - MongoDB for data persistence
-- ✅ **User Authentication** - Secure login/signup system
-- ✅ **Real-time Cart Management** - Add, update, and remove items
-- ✅ **Order Management** - Track and manage orders
-- ✅ **Responsive Design** - Works on all devices
-- ✅ **Customizable Theme** - Easy color and theme customization
+---
 
-## Key Features
+## ✨ Key Highlights
 
-- **Order Online**: Users can easily browse through the menu and place orders for delivery.
-- **Take Order**: Customers can also choose to place orders for pickup.
-- **Book Table**: For those who prefer dining in, the website offers the option to book a table in advance.
-- **Menu**: The menu section provides a comprehensive list of food items available for order, along with descriptions and prices.
-- **App Details**: Information about any associated mobile applications for easy access to the service.
-- **Contact Page**: A dedicated contact page for users to reach out for inquiries, feedback, or support.
+* ✅ Fully responsive frontend design
+* ✅ Clean and structured UI for food ordering platforms
+* ✅ Interactive cart functionality (frontend logic)
+* ✅ Modular HTML, CSS, and JavaScript structure
+* ✅ Easy to extend with backend APIs
 
-## Technologies Used
+---
 
-- **HTML**: Markup language for structuring web pages.
-- **CSS**: Styling language for designing the visual layout of web pages.
-- **JavaScript**: Programming language for adding interactivity and functionality to web pages.
-- **GitHub Pages**: Hosting service for publishing the frontend code.
+## 🍽️ Features
 
-## Development Steps
+* **Browse Menu** — View food items with prices and descriptions
+* **Cart Management** — Add, update, and remove items (client-side)
+* **Table Booking UI** — Frontend interface for reservations
+* **Contact Page** — Simple and clean contact form UI
+* **Multi-page Layout** — Organized pages for better UX
 
-1. **Planning and Design**:
-   - Defined UI requirements based on user needs and business goals.
-
-2. **HTML Structure**:
-   - Developed web page structure using HTML elements.
-   - Organized content into logical sections like header, navigation, main content, and footer.
-
-3. **CSS Styling**:
-   - Styled HTML elements to create visually appealing design.
-   - Implemented responsive design for compatibility across various devices.
-
-4. **JavaScript Interactivity**:
-   - Enhanced user interaction with dynamic features like menu filtering and form validation.
+---
 
 ## 🛠️ Tech Stack
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+)
-- **Backend API**: RESTful API (Node.js/Express ready)
-- **Database**: MongoDB with Mongoose ODM
-- **Authentication**: JWT Token-based authentication
-- **Styling**: Custom CSS with Bootstrap 5
-- **Icons**: Font Awesome 6
-- **Animations**: AOS (Animate On Scroll)
-- **Responsive Design**: Mobile-first approach
+* **HTML5** — Semantic page structure
+* **CSS3** — Custom styling & responsive design
+* **JavaScript (ES6)** — Interactivity and dynamic behavior
+* **Font Awesome** — Icons
+
+---
+
+## 🚀 Getting Started
+
+You can run this project locally **without any server setup**.
+
+```bash
+# Clone the repository
+git clone https://github.com/khushi-joshi-05/Food-ordering-website.git
+
+# Open the project folder
+cd Food-ordering-website
+
+# Open in browser
+open index.html
+```
+
+Or use **VS Code Live Server** for a better development experience.
+
+---
+
+## 📁 Project Structure
+
+```
+├── index.html
+├── style.css
+├── script.js
+├── Html-files/
+├── Css-files/
+├── Images/
+└── icons/
+```
+
+---
+
+## 🌱 Future Enhancements
+
+* Backend integration (Node.js / Express)
+* Database support (MongoDB)
+* User authentication
+* Real-time order tracking
+* Admin dashboard
 
 ---
 
 ## 📝 License
 
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
 
 ## 👨‍💻 Author
 
 **Disha Jyala**
 
-- GitHub: [https://github.com/thedishajyala](https://github.com/thedishajyala)
-- LinkedIn: [https://www.linkedin.com/in/dishajyala/](https://www.linkedin.com/in/dishajyala/)
-- Email: thedishajyala@gmail.com
-- Portfolio: your-portfolio-url.com
+* GitHub: [https://github.com/thedishajyala](https://github.com/thedishajyala)
+* LinkedIn: [https://www.linkedin.com/in/dishajyala/](https://www.linkedin.com/in/dishajyala/)
+* Email: [thedishajyala@gmail.com](mailto:thedishajyala@gmail.com)
 
 ---
 
-## ⭐ Star This Repo
+## ⭐ Support
 
-If you found this project helpful, please consider giving it a star on GitHub!
-
----
+If you find this project useful, consider giving it a ⭐ on GitHub.
 
 <p align="center">Made with ❤️ by <strong>Disha Jyala</strong></p>
-<p align="center">© 2025 Disha Jyala. All rights reserved.</p>
