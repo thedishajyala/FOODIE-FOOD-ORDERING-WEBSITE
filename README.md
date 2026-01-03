@@ -81,6 +81,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 **Disha Jyala**
 
 - GitHub: [https://github.com/thedishajyala](https://github.com/thedishajyala)
+- LinkedIn: [https://www.linkedin.com/in/dishajyala/](https://www.linkedin.com/in/dishajyala/)
 - Email: thedishajyala@gmail.com
 - Portfolio: your-portfolio-url.com
 
